@@ -1,0 +1,30 @@
+IT VIP v0.83.27-dev — COMPLETE SOURCE PACKAGE v111
+Date: 2026-11-25
+Base package: IT_VIP_v0.83.26-dev_COMPLETE_v110.zip
+
+Implemented:
+- Hardened Backup Center restore-manifest paths against absolute/rooted paths, traversal, backslash aliases, Windows ADS syntax, control/invalid filename characters, and trailing dot/space aliases.
+- Rejected reserved Windows device-name segments: CON, PRN, AUX, NUL, COM1-9, and LPT1-9.
+- Added invariant Windows lowercase path-key generation and rejection of case-insensitive duplicate restore targets.
+- Rejected duplicate/unexpected FOLDER records and bounded manifest line size, total records, and file count.
+- Added source-contract tests and bilingual documentation updates.
+
+Validation performed on Linux:
+- Python pytest: 90 passed.
+- Python compileall (server/tests/tools): passed.
+- Project validator: 461 PASS / 0 FAIL.
+- Native strict JSON tests: 12 groups passed.
+- Deterministic native fuzz smoke: 50,000 mutations + 15 seeds passed.
+- ZIP CRC integrity: verified.
+- SHA-256: generated and independently rechecked.
+
+Platform limitations:
+- No MSVC, MinGW-w64, Windows SDK/runtime, or Windows filesystem runtime was available; no EXE build or Windows runtime pass is claimed.
+- LCMapStringEx behavior and Backup Center restore path validation still require Windows CI/runtime qualification.
+- v110 staged rollback is not crash-consistent against power loss, forced termination, or storage failure during commit/rollback.
+- NTFS/exFAT/FAT32, USB disconnect, low-space, >4 GB, read-only, and permission-denied tests remain open.
+- Windows 10/11 GUI, mixed-DPI, RTL, audio, notifications, PowerShell 5.1/7, signing/licensing, and bootable Boot Manager qualification remain open.
+
+Completion assessment:
+- Complete cumulative source package, not a Windows-qualified or production release.
+- See docs/PROJECT_COMPLETION_AUDIT_v111.md and docs/STORAGE_MANIFEST_HARDENING_v111.md.

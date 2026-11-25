@@ -1,0 +1,33 @@
+IT VIP v0.83.13-dev — COMPLETE Package v97
+Release validation report
+Date: 2026-11-25
+
+Delivered:
+- Continued from the complete v96 source archive; all 329 prior archive members remain present.
+- Added two original short PCM WAV lifecycle cues: ui_startup.wav and ui_shutdown.wav.
+- Extended the shared WinMM audio helper with Startup and Shutdown cue types.
+- Startup and shutdown cues are opt-in and default to disabled when their INI keys are absent.
+- Added separate VIP Studio enable switches and preview buttons for startup and shutdown sounds.
+- Startup cue is requested after the dashboard is shown; shutdown cue is played synchronously during main-window close so the process does not immediately cut off the short cue.
+- Preserved the master mute, six existing cue settings, custom WAV imports, and fallback behavior.
+- Updated Arabic/English documentation, configuration example, roadmap, build status, and audio contract tests.
+
+Executed checks in this Linux environment:
+- Static project validation: 458 PASS / 0 FAIL.
+- Python tests: 42 PASS.
+- Python syntax compilation: PASS (python -m compileall -q server tests tools).
+- Native strict JSON tests: 12 groups PASS.
+- Deterministic JSON fuzz smoke: 50,000 mutations + 15 seeds PASS.
+- Source continuity: all 329 files from the v96 archive remain present in the v97 source tree.
+- Audio asset checks: both new files are mono, 16-bit PCM, 22,050 Hz WAV and within the tested duration bound.
+- ZIP integrity: all members passed CRC validation after packaging.
+- SHA-256: generated and independently verified against the packaged archive.
+
+Not executed / limitations:
+- No MSVC or MinGW Windows compiler was available; native Windows GUI targets were not compiled.
+- No Windows 10/11 GUI runtime test was performed.
+- Audible startup/shutdown playback, timing on close, audio-device routing, and user interaction with the new VIP Studio controls require Windows runtime validation.
+- Shutdown playback uses a short synchronous cue (about 0.58 seconds), intentionally delaying final window closure by at most the cue duration when enabled.
+- Hover/press visual animation work remains deferred; this release adds lifecycle audio only.
+
+Validation scope is source/static integration and host-side tests only. It does not establish Windows compilation or runtime correctness.

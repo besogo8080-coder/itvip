@@ -1,0 +1,33 @@
+IT VIP v118 — Release Validation Report
+Candidate: IT_VIP_v0.83.34-dev_COMPLETE_v118.zip
+Baseline: IT_VIP_v0.83.33-dev_COMPLETE_v117.zip
+Date: 2026-11-25
+
+IMPLEMENTATION
+- Hardened deployment/Sign-ITVIPUserEdition.ps1.
+- Rejects missing/reparse-point edition roots and reparse-point entries before key copy and during inventory creation.
+- Rejects unsafe inventory paths, ADS/colon syntax, traversal/dot aliases, invalid Windows filename characters, reserved device names, trailing dots/spaces, case-insensitive duplicates, and empty inventories.
+- Normalizes nested inventory paths to forward slashes.
+- Requires RSA-3072 private/public keys and compares modulus and exponent before signing.
+- Added tests/windows/Test-EditionSigningHardening.ps1 for matching key-pair signing, signature verification, nested path normalization, and mismatched-key rejection.
+- Wired the fixture into both Windows PowerShell 5.1 and PowerShell 7 CI matrix runs.
+
+HOST VALIDATION PERFORMED
+- Python pytest: 115 passed.
+- Python compileall (server/tests/tools): passed.
+- Project static validator: 471 PASS / 0 FAIL.
+- Native strict JSON tests: 12 groups passed.
+- Deterministic strict JSON fuzz smoke: 50,000 mutations + 15 seeds passed.
+- GitHub Actions workflow YAML parsed with PyYAML: passed.
+- Source continuity: all 411 regular files from v117 retained; 4 implementation/documentation files added. The package also contains two validation-report copies, for 417 regular ZIP file entries total.
+- ZIP CRC integrity and SHA-256 checksum: verified separately.
+
+NOT RUN / NOT CLAIMED
+- PowerShell 5.1 or PowerShell 7 runtime execution.
+- RSA key-pair signing fixture on Windows or native CNG verification.
+- MSVC x86/x64 or MinGW x64 compilation; no Windows EXE build.
+- Authenticode signing, DPAPI/CNG runtime qualification, Windows GUI testing, Windows 10/11 testing, USB/NTFS/exFAT/FAT32 restore qualification.
+- Windows CI workflow was updated but not executed from this environment.
+
+RELEASE STATUS
+v118 is a cumulative development source package, not a Windows-qualified production release. Static source tests and Linux-host checks do not establish Windows PowerShell, cryptographic runtime, GUI, storage, or executable correctness.

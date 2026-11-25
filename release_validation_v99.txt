@@ -1,0 +1,26 @@
+IT VIP v0.83.15-dev — COMPLETE v99 RELEASE VALIDATION
+Date: 2026-11-25
+Base: IT_VIP_v0.83.14-dev_COMPLETE_v98.zip
+
+Implemented:
+- Native centered Win32 startup splash before the main dashboard.
+- Splash uses persisted Arabic/English language and selected theme accent.
+- Automatic 850 ms dismissal; no external dependency added.
+- Existing dashboard, modules, assets, and prior features retained cumulatively.
+
+Validation performed in Linux host environment:
+- Python tests: 44 passed.
+- Python compileall (server/tests/tools): passed.
+- Static project validator: 458 PASS / 0 FAIL.
+- Strict JSON native tests: 12 groups passed.
+- Deterministic parser fuzz smoke: 50,000 mutations + 15 seeds passed.
+- ZIP CRC integrity: checked after packaging.
+- Source continuity: every regular file in v98 retained in v99; only intentional edits/additions are layered.
+
+Not performed:
+- MSVC build: NOT RUN.
+- MinGW build: NOT RUN.
+- Windows 10/11 GUI runtime, splash timing, DPI, and visual checks: NOT RUN.
+- No Windows executable/runtime success is claimed.
+
+Scope: source-level and host-side static/portable tests only.

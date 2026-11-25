@@ -1,0 +1,32 @@
+IT VIP v0.83.28-dev — COMPLETE SOURCE PACKAGE v112
+Date: 2026-11-25
+Base package: IT_VIP_v0.83.27-dev_COMPLETE_v111.zip
+
+Implemented:
+- Added a per-restore durable journal with PREPARED, APPLYING, APPLIED, ROLLING_BACK, and COMMITTED phases.
+- Journal records include the item index, UTF-8-hex relative target paths, and whether each target existed before restore.
+- Journal writes use a temporary file, FlushFileBuffers, and MoveFileExW with write-through replacement.
+- Backup Center scans for journal-bearing .itvip_restore_txn_* directories at startup and offers to open a transaction folder for operator inspection.
+- Interrupted transactions are not automatically replayed or deleted; the operator is warned to preserve recovery material.
+- Rollback now stops if a rollback operation or its journal checkpoint fails, preserving an accurate recovery boundary.
+- Added source-contract tests, recovery procedure documentation, and updated bilingual release notes/roadmap.
+
+Validation performed on Linux:
+- Python pytest: 95 passed.
+- Python compileall (server/tests/tools): passed.
+- Project validator: 461 PASS / 0 FAIL.
+- Native strict JSON tests: 12 groups passed.
+- Deterministic native fuzz smoke: 50,000 mutations + 15 seeds passed.
+- ZIP CRC integrity: verified after packaging.
+- SHA-256: generated and independently rechecked.
+- Source continuity: all regular files from v111 retained; only documented in-place edits and additions.
+
+Platform limitations:
+- No MSVC, MinGW-w64, Windows SDK/runtime, or Windows filesystem runtime was available; no EXE build or Windows runtime pass is claimed.
+- Durable journal semantics, startup detection, forced-termination recovery, and FlushFileBuffers behavior still require Windows fault-injection tests.
+- No power-loss, NTFS/exFAT/FAT32, USB disconnect, low-space, >4 GB, permission-denied, or read-only-media tests were run.
+- Windows 10/11 GUI, mixed-DPI, RTL, audio, notifications, PowerShell 5.1/7, Authenticode signing, production licensing, and bootable Boot Manager qualification remain open.
+
+Completion assessment:
+- Complete cumulative source package, not a Windows-qualified or production release.
+- See docs/PROJECT_COMPLETION_AUDIT_v112.md and docs/STORAGE_RESTORE_RECOVERY_v112.md.

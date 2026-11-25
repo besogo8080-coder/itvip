@@ -1,0 +1,32 @@
+IT VIP v0.83.8-dev — COMPLETE Package v92
+Release validation report
+Date: 2026-11-25
+
+Delivered:
+- Continued cumulatively from the complete v91 source archive; all 292 substantive v91 files are preserved (no missing files).
+- Added optional live diagnostics mode to System-Diagnostics-ITVIP.ps1.
+- Added bounded live duration (1–60 minutes) and a hard cap of 3,601 samples; the existing short sampling mode remains the default.
+- Added approximate network receive/send bytes-per-second estimates using deltas from cumulative physical-adapter byte counters.
+- Added live console status output and included per-sample network-rate fields in the JSON, TXT, HTML, and CSV sample/report data.
+- First-sample network rates are intentionally unavailable because no prior counter exists. Rates are local adapter traffic, not internet speed.
+- Preserved the read-only diagnostics boundary and existing alert thresholds/history/report functionality.
+- Updated Arabic/English documentation, README files, roadmap, build status, project static validation, and focused contract tests.
+
+Executed checks in this Linux environment:
+- Static project validation: 448 PASS / 0 FAIL.
+- Python tests: 28 PASS.
+- Python syntax compilation: PASS (python -m compileall -q server tests tools).
+- Native strict JSON tests: 12 groups PASS.
+- Deterministic JSON fuzz smoke: 50,000 mutations + 15 seeds PASS.
+- Source continuity: all 292 substantive files from v91 are present in v92; no prior source files/modules were removed.
+- ZIP integrity: verified after packaging; all members passed CRC validation.
+- SHA-256: generated and independently verified against the packaged archive.
+
+Not executed / limitations:
+- PowerShell 5.1 / PowerShell Core are unavailable in this Linux environment; the modified PowerShell script was not parsed or executed.
+- Windows 10/11 network adapter counter behavior, sampling accuracy, disconnect/reconnect scenarios, and live console behavior require runtime validation on Windows.
+- Network rates are estimates based on counter deltas divided by the configured interval; provider latency and sample timing can affect accuracy.
+- No MSVC or MinGW Windows compilation or Windows GUI runtime test was performed.
+- Live monitoring is exposed through the diagnostics PowerShell workflow; it has NOT been integrated into the native Dashboard UI.
+
+Validation scope is source/static and host-side tests only. It does not establish Windows runtime correctness.

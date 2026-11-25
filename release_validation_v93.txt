@@ -1,0 +1,33 @@
+IT VIP v0.83.9-dev — COMPLETE Package v93
+Release validation report
+Date: 2026-11-25
+
+Delivered:
+- Continued from the complete v92 archive; all 294 files from v92 are present in the v93 source tree (no prior archive members missing).
+- Added native Win32 System Monitor GUI with bilingual labels and shared IT VIP branding.
+- Added CPU sampling through GetSystemTimes deltas, RAM via GlobalMemoryStatusEx, active non-loopback network byte counters via GetIfTable2, and Windows system-volume capacity via GetDiskFreeSpaceExW.
+- Added start, pause/resume, stop, bounded 1/5/10/30/60-minute sessions, and rolling CPU/RAM/network charts capped at 90 samples.
+- Appends live samples to reports/system_monitor_live.csv.
+- Integrated a new Live System Monitor action into the main Dashboard and capability mapping.
+- Added MSVC and MinGW build targets and included the executable in Windows build verification.
+- Added bilingual documentation and source-contract tests.
+
+Executed checks in this Linux environment:
+- Static project validation: 458 PASS / 0 FAIL.
+- Python tests: 34 PASS.
+- Python syntax compilation: PASS (python -m compileall -q server tests tools).
+- Native strict JSON tests: 12 groups PASS.
+- Deterministic JSON fuzz smoke: 50,000 mutations + 15 seeds PASS.
+- Source continuity: all 294 files from v92 archive are present; no prior archive members were removed.
+- ZIP integrity: verified after packaging; all members passed CRC validation.
+- SHA-256: generated and independently verified against the packaged archive.
+
+Not executed / limitations:
+- No MSVC or MinGW Windows compiler was available; the new Win32 GUI target was not compiled.
+- No Windows 10/11 GUI runtime test was performed.
+- GetSystemTimes, GlobalMemoryStatusEx, GetIfTable2, and GetDiskFreeSpaceExW behavior and accuracy require validation on Windows.
+- CPU/network first samples establish counter baselines; network graph is scaled relative to 1 MB/s and represents local adapter traffic, not internet speed.
+- The native monitor does not expose thermal sensors in this version.
+- PowerShell diagnostics workflows remain separate; this new native monitor does not embed the PowerShell diagnostics output.
+
+Validation scope is source/static and host-side tests only. It does not establish Windows compilation or runtime correctness.

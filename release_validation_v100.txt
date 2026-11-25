@@ -1,0 +1,29 @@
+IT VIP v0.83.16-dev — COMPLETE PACKAGE v100
+Date: 2026-11-25
+Base package: IT_VIP_v0.83.15-dev_COMPLETE_v99.zip
+
+Implemented:
+- Native Win32 animated toast notifications (slide/fade, theme accent, bilingual title/body).
+- Non-activating popup behavior; clicking a toast opens reports/ui_notifications.log.
+- Timestamped local UI notification history and launch success/failure feedback.
+- Existing configurable Notification audio cue integrated with toast display.
+- Dynamically resolved per-monitor-v2 DPI awareness request with legacy system-DPI fallback.
+- Documentation and source-contract tests added.
+
+Validation performed on the Linux host:
+- Python pytest: 48 passed.
+- Python compileall (server/tests/tools): passed.
+- Project validator: 458 PASS / 0 FAIL.
+- Native strict JSON tests: 12 groups passed.
+- Deterministic fuzz smoke: 50,000 mutations + 15 seeds passed.
+- Prior v99 file continuity: 349/349 prior files retained (missing: 0).
+- Windows compiler availability: MSVC and MinGW not available in this environment; no Windows EXE build claimed.
+- Windows 10/11 GUI runtime, mixed-DPI behavior, toast animation/audio, and interactive click-through were not executed here.
+
+Known limitations:
+- One toast at a time; newer toast replaces the previous one (no queue/deduplication).
+- Notification log has no in-app search, retention policy, or clear button.
+- Toast path currently covers dashboard module launch feedback and initial ready message, not every module event.
+- DPI awareness is requested, but complete child-control relayout at mixed monitor scales remains future work.
+
+The package is cumulative from v99; all prior files are retained. Static/source checks are not a substitute for Windows build/runtime validation.

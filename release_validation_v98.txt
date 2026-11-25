@@ -1,0 +1,22 @@
+IT VIP v0.83.14-dev — COMPLETE Source Package v98
+Base: v97 complete archive; cumulative source continuity preserved.
+
+Implemented:
+- Dashboard native buttons now receive a theme-colored outline on hover.
+- While pressed, the outline becomes thicker and uses the secondary theme accent.
+- Standard BUTTON input, keyboard navigation, accessibility behavior and command notifications remain delegated through DefSubclassProc.
+- Scope is explicitly limited to the main dashboard. VIP Studio and separate tool windows are not claimed as covered.
+
+Validation performed in Linux:
+- Python tests: 43 passed.
+- Python compileall: PASS.
+- Static project validator: 458 PASS / 0 FAIL.
+- Native strict JSON tests: 12 groups passed.
+- Deterministic native fuzz smoke: 50,000 mutations + 15 seeds passed.
+- Source continuity: every file member from v97 remains present in v98 (verified separately).
+- ZIP CRC integrity and SHA-256: checked after packaging.
+
+Not performed:
+- MSVC or MinGW compilation.
+- Windows 10/11 execution, GUI interaction, DPI/RTL, accessibility, or visual runtime testing.
+- The source-contract tests do not replace native Windows verification.

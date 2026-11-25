@@ -1,0 +1,32 @@
+IT VIP v0.83.26-dev — COMPLETE SOURCE PACKAGE v110
+Date: 2026-11-25
+Base package: IT_VIP_v0.83.25-dev_COMPLETE_v109.zip
+
+Implemented:
+- Restore manifest parsing now retains the expected relative path, byte size, and SHA-256 digest for every file.
+- Backup and destination paths reject Windows reparse-point components.
+- Restore stages every incoming file and snapshots every existing destination before modifying application files.
+- Each staged copy is rechecked against the manifest size and SHA-256 digest.
+- Commit uses same-volume MoveFileExW operations; handled commit failures trigger reverse-order rollback.
+- Newly created destination files are removed during rollback; overwritten files are restored from snapshots.
+- If rollback fails, the transaction directory is retained for manual recovery instead of being deleted.
+- Added source-contract tests and updated bilingual documentation, roadmap, build status, and completion audit.
+
+Local validation (Linux host):
+- Python pytest: 86 passed.
+- Python compileall (server/tests/tools): passed.
+- Project validator: 461 PASS / 0 FAIL.
+- Native strict JSON tests: 12 groups passed.
+- Deterministic fuzz smoke: 50,000 mutations + 15 seeds passed.
+- Source continuity: all 375 non-cache regular files from v109 retained (modified in place where required).
+- ZIP CRC integrity and SHA-256 verified after packaging.
+
+Platform limitations:
+- No MSVC, MinGW-w64 cross compiler, Windows SDK/runtime, Windows 10/11 GUI, or physical USB testing is claimed.
+- The restore rollback covers handled runtime commit errors only; it is not crash-consistent against power loss, forced termination, or storage failure during commit/rollback.
+- Windows fault-injection tests for commit/rollback failure and filesystem qualification on NTFS/exFAT/FAT32 remain required.
+- Authenticode signing, production licensing, and bootable Boot Manager remain open release gates.
+
+Completion assessment:
+- Complete cumulative source package, not a Windows-qualified or production release.
+- See docs/PROJECT_COMPLETION_AUDIT_v110.md and docs/STORAGE_RESTORE_TRANSACTION_v110.md.

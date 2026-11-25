@@ -1,0 +1,28 @@
+IT VIP v0.83.20-dev — COMPLETE PACKAGE v104
+Date: 2026-11-25
+Base package: IT_VIP_v0.83.19-dev_COMPLETE_v103.zip
+
+Implemented in this cumulative update:
+- Added a local tool execution history at reports/tool_execution_history.tsv.
+- Every completed dashboard-launched native module or deployment CMD process records local completion time, filename, numeric exit code, and SUCCESS/NONZERO_EXIT classification.
+- Serialized concurrent history writes with a mutex.
+- Added bounded retention: when the history file reaches 512 KiB, it is compacted to the newest 2,000 lines.
+- Updated PowerShell-backed CMD wrappers to capture the PowerShell process exit code and return it after the interactive pause, so the existing dashboard process watcher can distinguish nonzero exits.
+- Added source-contract tests and bilingual documentation describing the log schema, local-only behavior, retention, and limitations.
+
+Validation performed on the Linux host:
+- Python pytest: 60 passed.
+- Python compileall (server/tests/tools): passed.
+- Project validator: 458 PASS / 0 FAIL.
+- Native strict JSON tests: 12 groups passed.
+- Deterministic fuzz smoke: 50,000 mutations + 15 seeds passed.
+- Source continuity: every regular file member from v103 is retained in v104.
+- ZIP CRC integrity and SHA-256 are checked after packaging.
+
+Platform limitations and remaining work:
+- MSVC and MinGW compilers are unavailable; no Windows executable build is claimed.
+- Windows 10/11 runtime, CMD exit-code propagation, Windows PowerShell 5.1/PowerShell 7 behavior, and GUI integration were not tested interactively.
+- The execution history records process exit status only; it does not capture stdout/stderr or prove semantic success of a tool's requested operation.
+- Nested child commands must propagate their own exit codes for the wrapper to report them reliably.
+
+This release report distinguishes source/static checks from Windows compilation and runtime tests. No Windows build or runtime test is claimed.

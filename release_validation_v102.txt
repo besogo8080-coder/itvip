@@ -1,0 +1,33 @@
+IT VIP v0.83.18-dev — COMPLETE PACKAGE v102
+Date: 2026-11-25
+Base package: IT_VIP_v0.83.17-dev_COMPLETE_v101.zip
+
+Implemented in this cumulative update:
+- Responsive dashboard reflow on window resize for top commands, core tools, and standalone module launchers.
+- Three-column fallback for narrower supported dashboard widths and four columns for wider layouts.
+- DPI-scaled control coordinates using GetDpiForWindow when available, with 96-DPI fallback.
+- Minimum dashboard tracking size to reduce control crowding.
+- Standalone native modules launched through CreateProcessW are monitored until process exit; the dashboard receives a queued notification containing the module filename and numeric exit code.
+- Added bilingual documentation and source-contract tests for the new behavior.
+
+Validation performed on the Linux host:
+- Python pytest: 54 passed.
+- Python compileall (server/tests/tools): passed.
+- Project validator: 458 PASS / 0 FAIL.
+- Native strict JSON tests: 12 groups passed.
+- Deterministic fuzz smoke: 50,000 mutations + 15 seeds passed.
+- Added source-contract checks for DPI helpers, resize reflow, minimum tracking size, module process watcher, exit-code capture, and notification dispatch: 7 passed.
+- Base v101 archive continuity is checked for every original file member.
+- ZIP CRC integrity and SHA-256 are checked after packaging.
+
+Platform limitations:
+- MSVC and MinGW compilers are unavailable in this environment; no Windows executable build is claimed.
+- Windows 10/11 GUI, resize behavior, multi-monitor mixed-DPI behavior, and process-exit notifications were not run interactively here.
+- Exit notifications cover standalone modules started through the dashboard CreateProcessW path; external .cmd and PowerShell launches are not yet covered by the process watcher.
+- Exit code 0 indicates process exit success only; it does not verify every internal task performed by a module.
+
+Known remaining work:
+- Apply responsive/DPI-aware reflow to VIP Studio and secondary dialogs.
+- Scale custom-painted dashboard text and graphics consistently across DPI values.
+- Propagate exit codes from .cmd and PowerShell utility launchers.
+- Verify MSVC and MinGW builds and Windows 10/11 runtime behavior.

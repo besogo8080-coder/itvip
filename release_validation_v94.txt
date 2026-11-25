@@ -1,0 +1,33 @@
+IT VIP v0.83.10-dev — COMPLETE Package v94
+Release validation report
+Date: 2026-11-25
+
+Delivered:
+- Continued from the complete v93 archive; all 308 previous archive files remain present in the v94 source tree.
+- Added a shared native UI audio helper with asynchronous PlaySoundW playback and a Windows notification fallback if a WAV asset is unavailable.
+- Added two original, short PCM WAV cues: a soft two-tone button click and a descending back/close cue.
+- Added a bilingual VIP Studio checkbox for enabling/disabling interface sounds; the setting persists in config/appearance.ini under [Audio] Enabled=1|0 and defaults to enabled when unset.
+- Added button-click hooks to the main dashboard, branded tool windows, Live System Monitor, and native module windows that process WM_COMMAND button notifications.
+- Added back/close cues on native window destruction and the dashboard/customizer close paths.
+- Added WinMM link dependencies to MSVC and MinGW native executable build commands.
+- Added Arabic/English documentation and a dedicated source-contract/audio-asset test module.
+
+Executed checks in this Linux environment:
+- Static project validation: 458 PASS / 0 FAIL.
+- Python tests: 38 PASS.
+- Python syntax compilation: PASS (python -m compileall -q server tests tools).
+- Native strict JSON tests: 12 groups PASS.
+- Deterministic JSON fuzz smoke: 50,000 mutations + 15 seeds PASS.
+- Audio asset checks: both WAV files verified as mono, 16-bit, 22,050 Hz uncompressed PCM with bounded durations.
+- Source continuity: all 308 files from the v93 archive remain present; no prior archive member was removed.
+- ZIP integrity: all members passed CRC validation after packaging.
+- SHA-256: generated and independently verified against the packaged archive.
+
+Not executed / limitations:
+- No MSVC or MinGW Windows compiler was available; native Windows GUI targets were not compiled in this environment.
+- No Windows 10/11 GUI runtime test was performed.
+- Audible playback, device routing, perceived volume, and sound preference behavior require runtime validation on Windows with an audio device.
+- The bundled WAV files are packaged as loose assets and must remain in assets/audio relative to the project root.
+- The click/back sounds are limited to native windows whose source handles WM_COMMAND button notifications and window destruction; external PowerShell/CMD console workflows do not receive these UI cues.
+
+Validation scope is source/static and host-side tests only. It does not establish Windows compilation or runtime correctness.

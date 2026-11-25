@@ -1,0 +1,30 @@
+IT VIP v0.83.17-dev — COMPLETE PACKAGE v101
+Date: 2026-11-25
+Base package: IT_VIP_v0.83.16-dev_COMPLETE_v100.zip
+
+Implemented in this cumulative update:
+- Added bilingual in-app Notification Center, accessible from the dashboard and toast popups.
+- Added case-insensitive text search, refresh, explicit-confirmation clear, and open-log action.
+- Added FIFO toast queue with up to 50 pending notifications; active toast is no longer replaced.
+- Added bounded notification-log retention: when larger than 512 KiB, compact to the newest 1,000 lines using replace-on-success semantics.
+- Extended existing hover/pressed button accent treatment to VIP Studio child buttons.
+- Added resizable notification-center layout and source-contract coverage.
+
+Validation performed on the Linux host:
+- Python pytest: 52 passed.
+- Python compileall (server/tests/tools): passed.
+- Project validator: 458 PASS / 0 FAIL.
+- Native strict JSON tests: 12 groups passed.
+- Deterministic fuzz smoke: 50,000 mutations + 15 seeds passed.
+- Base v100 archive continuity: 354/354 original file members retained; final archive contains 356 file members.
+- ZIP CRC integrity and SHA-256 are checked after packaging.
+
+Platform limitations:
+- MSVC and MinGW compilers are unavailable in this environment; no Windows executable build is claimed.
+- Windows 10/11 GUI runtime, notification queue timing, search interaction, mixed-DPI relayout, and audio behavior were not executed here.
+- Static/source checks do not prove successful Windows compilation or runtime behavior.
+
+Known remaining work:
+- Complete dashboard-wide reflow for mixed-DPI and narrow-window layouts.
+- Extend notification event producers into every standalone module (current events originate from the dashboard path).
+- Verify native UI on Windows 10/11 using both MSVC and MinGW build paths where available.

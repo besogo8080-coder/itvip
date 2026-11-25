@@ -1,0 +1,33 @@
+IT VIP v119 — Release Validation Report
+Date: 2026-11-25
+Baseline: IT_VIP_v0.83.34-dev_COMPLETE_v118.zip
+Candidate: IT_VIP_v0.83.35-dev_COMPLETE_v119.zip
+
+IMPLEMENTATION
+- Added BUILD_WINDOWS_10.bat for a guided local MSVC x64 and x86 build on Windows 10.
+- Detects Visual Studio C++ tools through vswhere and VsDevCmd.bat.
+- Runs build.bat msvc separately for each architecture.
+- Runs tools/verify_windows_build.ps1 before packaging each architecture.
+- Added tools/Package-WindowsBuild.ps1, requiring all 34 declared executables.
+- Runtime packaging preserves the required <package>\\build layout for ITVIP.exe and companion modules, with assets/config/deployment beside it.
+- Runtime ZIP creation verifies required archive entries and generates SHA-256.
+- Added Arabic Windows 10 build instructions and source-contract tests.
+
+HOST VALIDATION PERFORMED ON LINUX
+- Python pytest: 118 passed.
+- Python compileall (server/tests/tools): passed.
+- Static project validator: 471 PASS / 0 FAIL.
+- Native strict JSON tests: 12 groups passed.
+- Deterministic strict JSON fuzz smoke: 50,000 mutations + 15 seeds passed.
+- Source continuity: all 417 regular files from v118 retained; 7 new files added.
+- Final ZIP CRC integrity: passed.
+- Final ZIP SHA-256 checksum: generated and independently verified.
+
+NOT RUN / NOT CLAIMED
+- BUILD_WINDOWS_10.bat has not been run on Windows 10 from this Linux host.
+- MSVC x64/x86 compiler and linker execution, dumpbin PE verification, runtime ZIP generation, and executable launch remain pending on the user's Windows computer or Windows CI.
+- No EXE, MSI, Setup, or Authenticode-signed installer is included in this source ZIP.
+- GUI, storage, DPAPI/CNG, PowerShell 5.1/7, and Authenticode runtime qualification remain release gates.
+
+RELEASE STATUS
+v119 is a cumulative complete source package plus a Windows 10 build-and-package handoff. The actual runnable application ZIPs are generated only after the Windows build script completes successfully on Windows 10.

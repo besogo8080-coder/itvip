@@ -1,0 +1,34 @@
+IT VIP v0.83.24-dev — COMPLETE SOURCE PACKAGE v108
+Date: 2026-11-25
+Base package: IT_VIP_v0.83.23-dev_COMPLETE_v107.zip
+
+Implemented:
+- Responsive relayout for the shared branded secondary-tool GUI: heading, subtitle,
+  path/account labels and fields, browse button, action buttons, status, stop button,
+  progress indicator, and output pane.
+- Second action button wraps to its own row when the client width cannot fit both actions.
+- Added a minimum tracking size and relayout on WM_SIZE and WM_DPICHANGED.
+- Added source-contract regression tests and bilingual documentation/audit updates.
+
+Local validation (Linux host):
+- Python pytest: 78 passed.
+- Python compileall (server/tests/tools): passed.
+- Project validator: 461 PASS / 0 FAIL.
+- Native strict JSON tests: 12 groups passed.
+- Deterministic fuzz smoke: 50,000 mutations + 15 seeds passed.
+- GitHub Actions YAML parsed successfully; jobs detected: MSVC, portable tests, MinGW,
+  and PowerShell runtime tests.
+- Source continuity: all 393 regular-file entries from v107 retained.
+- New source/documentation/report files: 4 (one new test, one audit, and the release report in the root and reports directory).
+- ZIP CRC integrity and SHA-256 verified after packaging.
+
+Platform limitations:
+- No MSVC, MinGW, Windows runtime, Windows 10/11 GUI, or hardware testing is claimed.
+- Mixed-DPI rendering, font clipping, RTL visual behavior, and keyboard navigation still
+  require interactive Windows qualification.
+- Authenticode signing, production licensing, storage/USB runtime validation, and bootable
+  Boot Manager remain open release gates.
+
+Completion assessment:
+- Complete cumulative source package, not a Windows-qualified or production release.
+- See docs/PROJECT_COMPLETION_AUDIT_v108.md for remaining release gates.

@@ -1,0 +1,33 @@
+IT VIP v115 release validation
+Date: 2026-11-25
+Baseline: IT_VIP_v0.83.30-dev_COMPLETE_v114.zip
+Candidate: IT_VIP_v0.83.31-dev_COMPLETE_v115.zip
+
+Executed on Linux host:
+- pytest -q -p no:cacheprovider: 108 passed
+- License authority focused tests: 14 passed
+- Python compileall (server, tests, tools): PASS
+- project validator: 465 PASS / 0 FAIL
+- native strict JSON: 12 test groups passed
+- deterministic strict JSON fuzz smoke: 50,000 mutations + 15 seeds passed
+- source continuity: all 403 regular files from v114 retained; 3 new documentation/release files added
+- ZIP CRC integrity: PASS
+- SHA-256 checksum: generated and independently verified
+
+Implemented in v115:
+- Strict UTF-8 JSON request decoding for license authority mutations.
+- Duplicate JSON property rejection.
+- Non-standard JSON constants (NaN/Infinity) rejection.
+- Explicit application/json and decimal Content-Length requirements; 8 KiB cap retained.
+- Transfer-Encoding rejection and exact request-body length check.
+- SQLite BEGIN IMMEDIATE before revoke/restore state, revision, and audit-chain updates.
+- Regression tests for ambiguous JSON, invalid content type, non-standard constants, and 24 concurrent writer transactions.
+
+Not executed:
+- Windows CI workflow, MSVC x86/x64 or MinGW x64 builds; no Windows EXE build.
+- Windows PowerShell 5.1/7 runtime, RSA signing/verifying, DPAPI/CNG, Authenticode.
+- Real TLS certificate handshake or remote deployment qualification.
+- Windows 10/11 GUI, native verifier, NTFS/exFAT/FAT32/USB qualification.
+
+Security boundary:
+The authority remains a reference control-plane service. It does not sign licenses and does not contain the owner RSA private key. The audit chain is unkeyed SHA-256 (tamper-evident, not tamper-proof); X-ITVIP-Actor is caller-supplied, not verified identity. No production readiness or Windows runtime qualification is claimed.

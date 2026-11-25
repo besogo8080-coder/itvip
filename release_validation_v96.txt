@@ -1,0 +1,31 @@
+IT VIP v0.83.12-dev — COMPLETE Package v96
+Release validation report
+Date: 2026-11-25
+
+Delivered:
+- Continued from the complete v95 source archive; all 322 prior archive members remain present.
+- Added six VIP Studio custom WAV import controls: click, back, success, warning, completion, and notification.
+- Imported files are copied into assets/audio/custom/ and each cue path is persisted in config/appearance.ini using project-relative paths.
+- Import checks the WAV extension, RIFF/WAVE container signature, regular-file status, and a 20 MiB maximum size.
+- Shared audio helper resolves per-cue custom paths and falls back to the bundled WAV cue when a configured custom file is missing.
+- Preserved master mute and per-cue enable settings and backward compatibility with v95 settings.
+- Updated Arabic/English documentation, roadmap, build status, and audio contract tests.
+
+Executed checks in this Linux environment:
+- Static project validation: 458 PASS / 0 FAIL.
+- Python tests: 41 PASS.
+- Python syntax compilation: PASS (python -m compileall -q server tests tools).
+- Native strict JSON tests: 12 groups PASS.
+- Deterministic JSON fuzz smoke: 50,000 mutations + 15 seeds PASS.
+- Source continuity: all 322 files from the v95 archive remain present in the v96 source tree.
+- ZIP integrity: all members passed CRC validation after packaging.
+- SHA-256: generated and independently verified against the packaged archive.
+
+Not executed / limitations:
+- No MSVC or MinGW Windows compiler was available; native Windows GUI targets were not compiled.
+- No Windows 10/11 GUI runtime test was performed.
+- Custom WAV playback, device routing, codec compatibility, and import UX require Windows runtime validation with an audio device.
+- Importer validates the RIFF/WAVE container signature and file-size bound, but does not decode or transcode audio. PCM WAV is recommended.
+- Hover/press animation work remains deferred pending native Windows rendering and DPI validation.
+
+Validation scope is source/static integration and host-side tests only. It does not establish Windows compilation or runtime correctness.

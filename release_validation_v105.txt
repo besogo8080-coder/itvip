@@ -1,0 +1,33 @@
+IT VIP v0.83.21-dev — COMPLETE PACKAGE v105
+Date: 2026-11-25
+Base package: IT_VIP_v0.83.20-dev_COMPLETE_v104.zip
+
+Implemented:
+- Native dashboard Command Center for tracked dashboard-launched native modules and deployment CMD wrappers.
+- Live process rows show filename, PID, and elapsed seconds; completion removes the live row and refreshes the view.
+- Completed process history now stores local completion timestamp, filename, exit code, SUCCESS/NONZERO_EXIT, duration_ms, and PID.
+- Backward-compatible reader for legacy four-field v104 history records.
+- Search and bilingual Running/Success/Failed filters, one-second refresh, manual refresh, open-log, and CSV export.
+- Resizable Command Center window with a minimum tracking size and bottom controls that remain within the client area.
+- Added command_center capability to owner permission profiles and user-edition packaging; old profiles default the new capability to disabled.
+- Added bilingual documentation, source-contract tests, and a project completion audit.
+
+Validation performed on Linux host:
+- Python pytest: 68 passed.
+- Python compileall (server/tests/tools): passed.
+- Project validator: 461 PASS / 0 FAIL.
+- Native strict JSON tests: 12 groups passed.
+- Deterministic fuzz smoke: 50,000 mutations + 15 seeds passed.
+- Source continuity: every regular-file member from v104 is retained.
+- ZIP CRC integrity and SHA-256 checked after packaging.
+
+Platform limitations:
+- MSVC, MinGW, PowerShell, and Windows runtime are unavailable in this environment. No Windows executable build is claimed.
+- Windows 10/11 GUI behavior, Command Center ListView rendering, CSV export interaction, process lifecycle, DPI behavior, CMD exit-code propagation, and PowerShell 5.1/7 runtime remain untested interactively.
+- Command Center tracks only processes launched through the dashboard's tracked CreateProcessW paths. It does not enumerate unrelated system processes.
+- It is observational only: it does not terminate, restart, or elevate processes.
+- Exit code zero is process status, not proof that an operation achieved its intended result.
+
+Completion assessment:
+- This is a complete cumulative source package, not a Windows-qualified release.
+- See docs/PROJECT_COMPLETION_AUDIT_v105.md for grouped outstanding release gates.

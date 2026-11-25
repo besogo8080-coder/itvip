@@ -1,0 +1,32 @@
+IT VIP v0.83.7-dev — COMPLETE Package v91
+Release validation report
+Date: 2026-11-25
+
+Delivered:
+- Continued cumulatively from the complete v90 source archive; no existing source files or modules were intentionally removed.
+- Added configurable bounded alert thresholds: CPU 1–100% (default 85%), memory 1–100% (default 90%), and fixed-volume free space 1–50% (default 10%).
+- CPU and memory threshold crossings are recorded per sample; low free-space thresholds are evaluated for fixed logical volumes.
+- Included threshold configuration and alert records in JSON, TXT, and HTML diagnostics reports.
+- Added a dark HTML status summary with alert/no-alert presentation.
+- Added persistent reports/system_diagnostics_history.csv for CPU/memory samples and alert text, capped at the latest 1,000 rows.
+- Added bilingual documentation, roadmap/build-status entries, seven additional project static checks, and four focused contract tests.
+- The workflow remains read-only and informational; it does not automatically stop processes, change services/drivers/power plans, repair Windows, or modify disks.
+
+Executed checks in this Linux environment:
+- Static project validation: 444 PASS / 0 FAIL.
+- Python tests: 25 PASS.
+- Python syntax compilation: PASS (python -m compileall -q server tests tools).
+- Native strict JSON tests: 12 groups PASS.
+- Deterministic JSON fuzz smoke: 50,000 mutations + 15 seeds PASS.
+- ZIP integrity: verified after packaging; all members passed CRC validation and all v90 files were preserved.
+- SHA-256: generated and independently verified against the packaged archive.
+
+Not executed / limitations:
+- PowerShell 5.1 / PowerShell Core are unavailable in this Linux environment; the modified PowerShell script was not parsed or executed.
+- Windows 10/11 CIM, network adapter, logical disk, and ACPI thermal-provider behavior require runtime validation on real Windows systems.
+- CPU load uses Win32_Processor.LoadPercentage and is coarse; network byte counters are cumulative, not throughput or an internet speed test.
+- Threshold alerts depend on the availability and accuracy of the underlying CIM/WMI providers. Alerts are informational only.
+- History CSV append/trim behavior has static contract coverage but has not been exercised in PowerShell on Windows.
+- No MSVC or MinGW Windows compilation or Windows GUI runtime test was performed.
+
+Validation scope is source/static and host-side tests only. It does not establish Windows runtime correctness.

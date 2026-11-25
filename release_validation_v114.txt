@@ -1,0 +1,25 @@
+IT VIP v114 release validation
+Date: 2026-11-25
+Baseline: IT_VIP_v0.83.29-dev_COMPLETE_v113.zip
+Candidate: IT_VIP_v0.83.30-dev_COMPLETE_v114.zip
+
+Executed on Linux host:
+- pytest: 104 passed
+- Python compileall (server, tests, tools): PASS
+- project validator: 461 PASS / 0 FAIL
+- native strict JSON: 12 test groups passed
+- deterministic strict JSON fuzz smoke: 50,000 mutations + 15 seeds passed
+- restore fault-boundary protocol model: 7 tests included in pytest; simulated abrupt stops at 12 boundaries
+- source continuity: all 399 non-cache regular files from v113 retained; 3 intended source/documentation files added
+- Windows CI workflow: duplicate PowerShell inspector step removed; restore fault-model test added to portable CI
+- ZIP CRC and SHA-256: verified after packaging
+
+Not executed:
+- Windows CI workflow itself
+- MSVC x86/x64 or MinGW x64 builds; no Windows EXE build
+- PowerShell 5.1/7 runtime fixture
+- Native C++ fault injection, forced Windows process termination, power-loss or storage-controller tests
+- Windows 10/11 GUI and NTFS/exFAT/FAT32/USB qualification
+
+Important scope:
+The new restore fault-injection suite is a deterministic Python filesystem protocol model. It is not injection into the native C++ implementation and does not emulate Windows filesystem/cache/flush semantics. It does not prove crash consistency. Restore remains a staged best-effort multi-file operation; the v113 PowerShell inspector remains read-only. v114 is a cumulative development source package, not a Windows-qualified or production release.

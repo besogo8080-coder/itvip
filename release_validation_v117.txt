@@ -1,0 +1,30 @@
+IT VIP v117 release validation
+Date: 2026-11-25
+Baseline: IT_VIP_v0.83.32-dev_COMPLETE_v116.zip
+Candidate: IT_VIP_v0.83.33-dev_COMPLETE_v117.zip
+
+Implemented:
+- Removed trust in caller-controlled X-ITVIP-Actor audit attribution.
+- Added validated server-side ITVIP_ADMIN_ACTOR (default license-authority-admin).
+- Added HTTP regression test proving spoofed actor headers do not alter stored audit principal.
+- Documented that the configured principal is not an individual human identity behind a shared token.
+
+Executed on Linux host:
+- pytest -q -p no:cacheprovider: 111 passed
+- Python compileall (server, tests, tools): PASS
+- project validator: 466 PASS / 0 FAIL
+- native strict JSON: 12 test groups passed
+- deterministic strict JSON fuzz smoke: 50,000 mutations + 15 seeds passed
+- source continuity: all regular files from v116 retained
+- ZIP CRC integrity: PASS
+- SHA-256 checksum: generated and independently verified
+
+Not executed:
+- Windows CI workflow; MSVC x86/x64 and MinGW x64 builds; no Windows EXE build.
+- Windows PowerShell 5.1/7 runtime.
+- RSA signing/verifying, DPAPI/CNG, native verifier runtime, Authenticode.
+- Real TLS certificate handshake, remote identity gateway, or production deployment.
+- Windows 10/11 GUI, NTFS/exFAT/FAT32/USB qualification, native restore crash tests.
+
+Security boundary:
+Audit attribution now records the server-configured service principal, not a human operator. Shared bearer credentials cannot provide individual accountability. The audit hash chain remains unkeyed SHA-256 and is not tamper-proof against an administrator who can rewrite the database. No production-readiness or Windows runtime qualification is claimed.

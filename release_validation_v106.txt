@@ -1,0 +1,31 @@
+IT VIP v0.83.22-dev — COMPLETE PACKAGE v106
+Date: 2026-11-25
+Base package: IT_VIP_v0.83.21-dev_COMPLETE_v105.zip
+
+Implemented:
+- Complete 34-executable target verification for native Windows build outputs.
+- MSVC dumpbin and MinGW objdump PE architecture verification.
+- MinGW-w64 x64 GitHub Actions build, strict JSON native test, and artifact upload.
+- Contract tests for build output list, stale-output cleanup, PE verifier, and CI wiring.
+- Updated bilingual README, build status, roadmap, and completion audit.
+
+Local validation (Linux host):
+- Python pytest: 72 passed.
+- Python compileall (server/tests/tools): passed.
+- Project validator: 461 PASS / 0 FAIL.
+- Native strict JSON tests: 12 groups passed.
+- Deterministic fuzz smoke: 50,000 mutations + 15 seeds passed.
+- GitHub Actions YAML parse: passed; msvc-build, portable-tests, mingw-build jobs found.
+- Source continuity: all regular files from v105 retained.
+- ZIP CRC integrity and SHA-256 verified.
+
+Platform limitations:
+- GitHub Actions jobs have not been executed from this environment.
+- No MSVC, MinGW, PowerShell, or Windows runtime is available locally. No Windows executable build is claimed.
+- MinGW x86 job, Windows 10/11 GUI runtime, PowerShell 5.1/7 tests, signing, production licensing, and bootable Boot Manager remain open.
+
+Completion assessment:
+- Complete cumulative source package, not a Windows-qualified release.
+- See docs/PROJECT_COMPLETION_AUDIT_v106.md for grouped outstanding gates.
+
+Source continuity: all 382 regular-file entries from v105 are retained.

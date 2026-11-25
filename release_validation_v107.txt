@@ -1,0 +1,31 @@
+IT VIP v0.83.23-dev — COMPLETE SOURCE PACKAGE v107
+Date: 2026-11-25
+Base package: IT_VIP_v0.83.22-dev_COMPLETE_v106.zip
+
+Implemented:
+- Added isolated Windows CMD-to-PowerShell process integration fixture.
+- Fixture validates exact propagation of exit codes 0 and 23 through CMD and ENDLOCAL.
+- Added GitHub Actions runtime test coverage for Windows PowerShell 5.1 and PowerShell 7.
+- Added source-contract tests and bilingual project documentation/audit updates.
+- Clarified that process exit propagation is not semantic validation of each tool.
+
+Local validation (Linux host):
+- Python pytest: 75 passed.
+- Python compileall (server/tests/tools): passed.
+- Project validator: 461 PASS / 0 FAIL.
+- Native strict JSON tests: 12 groups passed.
+- Deterministic fuzz smoke: 50,000 mutations + 15 seeds passed.
+- GitHub Actions YAML parsed successfully; jobs detected: MSVC, portable tests, MinGW, PowerShell runtime tests.
+- Source continuity: all 388 regular-file entries from v106 retained.
+- New source/documentation files: 4, plus this release report.
+- ZIP CRC integrity and SHA-256 verified after packaging.
+
+Platform limitations:
+- The Windows PowerShell 5.1 and PowerShell 7 runtime fixture is configured in CI but was NOT executed locally.
+- GitHub Actions jobs have not been executed from this environment.
+- No MSVC, MinGW, Windows runtime, Windows 10/11 GUI, or hardware testing is claimed.
+- Authenticode signing, production licensing, storage/USB runtime validation, and bootable Boot Manager remain open.
+
+Completion assessment:
+- Complete cumulative source package, not a Windows-qualified or production release.
+- See docs/PROJECT_COMPLETION_AUDIT_v107.md for remaining release gates.

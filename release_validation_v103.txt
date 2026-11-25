@@ -1,0 +1,27 @@
+IT VIP v0.83.19-dev — COMPLETE PACKAGE v103
+Date: 2026-11-25
+Base package: IT_VIP_v0.83.18-dev_COMPLETE_v102.zip
+
+Implemented in this cumulative update:
+- Dashboard deployment CMD utilities are now launched through an explicit cmd.exe child process using CreateProcessW, rather than ShellExecute. The existing process watcher monitors the wrapper process and reports its filename and numeric exit code through the notification center.
+- Branded native tool executables request per-monitor-v2 DPI awareness with a legacy system-DPI fallback.
+- Branded tool windows handle WM_DPICHANGED and resize the output, progress, and status regions when the client window is resized.
+- Added bilingual README/build/roadmap notes and focused source-contract tests for script process monitoring and branded tool DPI/layout behavior.
+
+Validation performed on the Linux host:
+- Python pytest: 58 passed.
+- Python compileall (server/tests/tools): passed.
+- Project validator: 458 PASS / 0 FAIL.
+- Native strict JSON tests: 12 groups passed.
+- Deterministic fuzz smoke: 50,000 mutations + 15 seeds passed.
+- Prior v102 archive file-member continuity is checked for every original file member.
+- ZIP CRC integrity and SHA-256 are checked after packaging.
+
+Platform limitations and remaining work:
+- MSVC and MinGW compilers are unavailable in this environment; no Windows executable build is claimed.
+- Windows 10/11 runtime, CMD process execution/exit-code behavior, and mixed-DPI monitor transitions were not interactively tested.
+- CMD wrapper exit codes are reported as returned by cmd.exe. A batch script must explicitly propagate nested PowerShell/native failures (for example with `exit /b %errorlevel%`) for those failures to be reflected reliably.
+- Branded tool responsive layout currently anchors/resizes the output, progress, and status regions; input/action controls and every secondary dialog are not yet fully reflowed for narrow windows or DPI changes.
+- Dashboard and branded tool text/graphics are not claimed to be fully DPI-scaled across all screens.
+
+This release report distinguishes source/static checks from Windows compilation and runtime tests. No Windows build or runtime test is claimed.

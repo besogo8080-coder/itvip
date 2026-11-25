@@ -1,0 +1,34 @@
+IT VIP v0.83.25-dev — COMPLETE SOURCE PACKAGE v109
+Date: 2026-11-25
+Base package: IT_VIP_v0.83.24-dev_COMPLETE_v108.zip
+
+Implemented:
+- Fast Copy cleanup is now limited to a destination root successfully created by the current worker.
+  A create race cannot cause cleanup to delete a directory created by another process.
+- Backup Center now fails closed on source enumeration, metadata, copy, SHA-256, manifest-write,
+  and flush errors instead of silently skipping inaccessible files.
+- Failed backup attempts remove only their own newly-created backup directory.
+- Backup file copies use no-overwrite semantics inside the fresh backup tree.
+- Restore continues to validate allowed relative paths, containment, file sizes, and SHA-256.
+- Added source-contract tests and bilingual storage safety documentation/audit.
+
+Local validation (Linux host):
+- Python pytest: 82 passed.
+- Python compileall (server/tests/tools): passed.
+- Project validator: 461 PASS / 0 FAIL.
+- Native strict JSON tests: 12 groups passed.
+- Deterministic fuzz smoke: 50,000 mutations + 15 seeds passed.
+- Source continuity: all 375 non-cache regular files from v108 retained.
+- Generated Python __pycache__ artifacts were excluded from the release archive.
+- ZIP CRC integrity and SHA-256 verified after packaging.
+
+Platform limitations:
+- No MSVC, MinGW, Windows runtime, Windows 10/11 GUI, or physical USB testing is claimed.
+- Storage behavior on NTFS/exFAT/FAT32, large files, disconnect, low-space, and cancellation
+  still requires Windows hardware/runtime qualification.
+- Restore is not transactional: an error during restore can leave a partially restored tree.
+- Authenticode signing, production licensing, and bootable Boot Manager remain open release gates.
+
+Completion assessment:
+- Complete cumulative source package, not a Windows-qualified or production release.
+- See docs/PROJECT_COMPLETION_AUDIT_v109.md and docs/STORAGE_SAFETY_v109.md.
